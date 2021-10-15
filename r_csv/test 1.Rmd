@@ -1,0 +1,33 @@
+---
+title: "Cars"
+author: "ZeRoyale"
+date: "10/15/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library("rvest")
+```
+
+```{r}
+carscsv <- "https://en.wikipedia.org/wiki/Comma-separated_values"
+```
+
+```{r}
+carscsv <- carscsv %>%
+  read_html() %>%
+  html_nodes(xpath = '//*[@id="mw-content-text"]/div[1]/table[2]') %>%
+  html_table()
+```
+
+```{r}
+write.csv(carscsv, file = "carscsv.csv")
+```
+
+```{r}
+read.csv('carscsv.csv')
+```
